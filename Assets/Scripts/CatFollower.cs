@@ -7,16 +7,14 @@ public class CatFollower : MonoBehaviour
 
     void Update()
     {
-        // 카메라의 위치 + 바라보는 방향 * 거리
+        // 카메라 앞에 고정
         Vector3 frontPos = arCamera.transform.position + arCamera.transform.forward * distance;
-
-        // 오브젝트 위치 갱신
         transform.position = frontPos;
 
-        // (선택) 항상 플레이어를 바라보게 하려면
+        // 카메라 바라보게
         Vector3 lookDir = arCamera.transform.position - transform.position;
-        lookDir.y = 0; // 바닥만 따라가게 (필요하다면)
-        if (lookDir != Vector3.zero)
+        lookDir.y = 0;
+        if (lookDir.sqrMagnitude > 0.001f)
             transform.rotation = Quaternion.LookRotation(lookDir);
     }
 }

@@ -216,7 +216,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 311425784}
         m_TargetAssemblyTypeName: FootprintManager, Assembly-CSharp
-        m_MethodName: PlaceFootprintInFront
+        m_MethodName: OnSpawnCatButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -293,9 +293,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 644d0f8104d3d7b4b87633174938ee48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  footprintPrefab: {fileID: 1526554761915109350, guid: 076879464bd682945aa7cd31ae139a36, type: 3}
+  catPrefab: {fileID: 1526554761915109350, guid: 076879464bd682945aa7cd31ae139a36, type: 3}
   arCamera: {fileID: 1457660262}
-  distanceInterval: 2
+  followDistance: 1.5
 --- !u!4 &311425785
 Transform:
   m_ObjectHideFlags: 0

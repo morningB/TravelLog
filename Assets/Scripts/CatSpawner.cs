@@ -1,7 +1,7 @@
+// CatSpawner.cs
 using UnityEngine;
-using UnityEngine.UI;
 
-public class FootprintManager : MonoBehaviour
+public class CatSpawner : MonoBehaviour
 {
     [Header("Settings")]
     public GameObject catPrefab;

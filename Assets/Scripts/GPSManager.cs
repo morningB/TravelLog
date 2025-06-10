@@ -47,8 +47,8 @@ public class GPSManager : MonoBehaviour
 
 
 
-        float desiredAccuracyInMeters = 10f;
-        float updateDistanceInMeters = 1f;
+        float desiredAccuracyInMeters = 0.5f;
+        float updateDistanceInMeters = 0.5f;
         // Start(얼마나 정확하게 위치를 잡을지, 얼마나 자주 위치를 갱신할지)
         Input.location.Start(desiredAccuracyInMeters, updateDistanceInMeters);
 
