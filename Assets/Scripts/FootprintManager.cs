@@ -16,10 +16,9 @@ public class FootprintManager : MonoBehaviour
             arCamera = Camera.main;
     }
 
-    // 버튼 OnClick에 이 함수를 연결하세요.
     public void OnSpawnCatButton()
     {
-        if (spawnedCat != null) return;  // 한 번만 생성
+        if (spawnedCat != null) return;  // 중복 생성 방지
 
         // 고양이 인스턴스 생성
         spawnedCat = Instantiate(catPrefab);

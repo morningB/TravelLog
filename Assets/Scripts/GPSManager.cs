@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class GPSManager : MonoBehaviour
 {
-    // 위도 경도 확인용 ui
-    public Text text_ui;
+    // 위도 경도 확인용 ui (나중에 삭제 예정)
+    public Text text_ui; 
     //싱글톤 인스턴스
     public static GPSManager Instance { get; private set; }
 
@@ -14,9 +14,9 @@ public class GPSManager : MonoBehaviour
     public double latitude { get; private set; }
     public double longitude { get; private set; }
     // 높이(필요할지는 모르지만 혹시 모르니)
-    public double altitude { get; private set; }
-    // 해당 위치의 수평 정확도 반경(미터)
-    public float horizontalAccuracy { get; private set; }
+    // public double altitude { get; private set; }
+    private float desiredAccuracyInMeters = 0.5f;
+    private float updateDistanceInMeters = 0.5f;
     
     void Awake()
     {
@@ -31,10 +31,28 @@ public class GPSManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    // Unity Location Script 문서에서 가져온 코드
-    IEnumerator Start()
+    // 코루틴 활용
+    void Start()
     {
+        StartCoroutine(InitializeLocationService());
+    }
 
+    void Update()
+    {
+        if (Input.location.status == LocationServiceStatus.Running)
+        {
+            // 위도/경도 실시간 표시
+            UpdateLocationData();
+            UpdateUIText();
+        }
+        else
+        {
+            text_ui.text = "Need to active GPS";
+        }
+    }
+     // Unity Location Script 문서에서 가져온 코드
+    private IEnumerator InitializeLocationService()
+    {
         // 위치 권한 요청 루프
         while (!Permission.HasUserAuthorizedPermission(Permission.FineLocation))
         {
@@ -45,10 +63,6 @@ public class GPSManager : MonoBehaviour
         if (!Input.location.isEnabledByUser)
             Debug.Log("Location not enabled on device or app does not have permission to access location");
 
-
-
-        float desiredAccuracyInMeters = 0.5f;
-        float updateDistanceInMeters = 0.5f;
         // Start(얼마나 정확하게 위치를 잡을지, 얼마나 자주 위치를 갱신할지)
         Input.location.Start(desiredAccuracyInMeters, updateDistanceInMeters);
 
@@ -81,33 +95,16 @@ public class GPSManager : MonoBehaviour
 
 
         }
-
-        //Input.location.Stop();
-    }
-
-    void Update()
-    {
-        if (Input.location.status == LocationServiceStatus.Running)
-        {
-            // 위도/경도 실시간 표시
-            UpdateLocationData();
-            UpdateUIText();
-        }
-        else
-        {
-            text_ui.text = "Need to active GPS";
-        }
     }
     //최신 위치 데이터 저장
     private void UpdateLocationData()
     {
         latitude = Input.location.lastData.latitude;
         longitude = Input.location.lastData.longitude;
-        altitude = Input.location.lastData.altitude;
-        horizontalAccuracy = Input.location.lastData.horizontalAccuracy;
+        //altitude = Input.location.lastData.altitude;
     }
 
-    //GPS 갱신 확인용 UI
+    //GPS 갱신 확인용 UI (나중에 삭제 예정)
     private void UpdateUIText()
     {
         if (text_ui != null)
