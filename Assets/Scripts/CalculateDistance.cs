@@ -5,7 +5,8 @@ public class CalculateDistance : MonoBehaviour
 {
     private double lastLat, lastLon;        // 바로 직전 위치
     private bool isStarted = false;
-    public float movedDistance = 0;
+    public float movedDistance;
+
     public float targetDistance = 100;      // 목표: 100m
     float movementThreshold = 3f;           // 위치 갱신하기 위한 최소 임계값(미터터)
     float spikeThreshold = 20f;           // 위치 튀는 값 방지용용 임계값(미터터)
