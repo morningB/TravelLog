@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class FootprintManager : MonoBehaviour
 {
@@ -25,6 +24,7 @@ public class FootprintManager : MonoBehaviour
         
         // 카메라 추종 스크립트 붙이고 파라미터 세팅
         var follower = spawnedCat.AddComponent<CatFollower>();
+        spawnedCat.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
         follower.arCamera = arCamera;
         follower.distance = followDistance;
     }

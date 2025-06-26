@@ -1,24 +1,25 @@
 using UnityEngine;
-using UnityEngine.UI;
-using Unity.VisualScripting;
 
 public class GetItemManager : MonoBehaviour
 {
     private RaycastHit hitInfo;
     public int getItemCount;
     public int maxItemCount = 5;
-    public Text itemText; 
-    public Text completeText; // 완료시 텍스트 띄우기(다른거로 대체할 예정)
-
+    
     void Start()
     {
-        completeText.enabled = false;
+        // UIManager에서 CompleteText를 가져와 비활성화
+        if (UIManager.instance != null && UIManager.instance.completeText != null)
+            UIManager.instance.completeText.enabled = false;
+        
+        UIManager.instance?.SetCompleteTextVisible(false);
+        UIManager.instance?.UpdateItemText(getItemCount, maxItemCount);
     }
     void Update()
     {
         if (getItemCount == maxItemCount)
         {
-            completeText.enabled = true;
+            UIManager.instance.completeText.enabled = true;
         }
         if (Input.GetMouseButtonDown(0))
             {
@@ -32,7 +33,7 @@ public class GetItemManager : MonoBehaviour
                         hitInfo.collider.gameObject.SetActive(false);
                         getItemCount++;
 
-                        itemText.text = "획득 아이템 수 : " + getItemCount + "/ " + maxItemCount;
+                        UIManager.instance?.UpdateItemText(getItemCount, maxItemCount);
                     }
                 }
             }
