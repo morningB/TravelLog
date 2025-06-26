@@ -22,8 +22,8 @@ public class GPSManager : MonoBehaviour
     public double latitude { get; private set; }
     public double longitude { get; private set; }
 
-    private float desiredAccuracyInMeters = 0.5f;
-    private float updateDistanceInMeters = 0.5f;
+    private float desiredAccuracyInMeters = 10f;
+    private float updateDistanceInMeters = 10f;
     
     private static GPSManager m_instance;
 
